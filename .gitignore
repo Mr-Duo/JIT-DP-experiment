@@ -5,5 +5,6 @@ tlel
 jitline
 
 __pycache__
+.DS_Store
 
 test.ipynb

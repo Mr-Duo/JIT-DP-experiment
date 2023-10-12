@@ -54,9 +54,14 @@ prjs = {
 }
 
 for prj, lang in prjs.items():
-    train_jitline(prj, lang, mode="within")
-    train_jitline(prj, lang, mode="cross")
-    train_jitline(prj, lang, mode="within", split=0.8)
-    train_jitline(prj, lang, mode="cross", split=0.8)
+    files = os.listdir("jitline")
+    if f"{prj}_within.pkl" not in  files:
+        train_jitline(prj, lang, mode="within")
+    if f"{prj}_cross.pkl" not in files:
+        train_jitline(prj, lang, mode="cross")
+    if f"{prj}_within_0.8.pkl" not in files:
+        train_jitline(prj, lang, mode="within", split=0.8)
+    if f"{prj}_cross_0.8.pkl" not in files:
+        train_jitline(prj, lang, mode="cross", split=0.8)
 
 logging.shutdown()
