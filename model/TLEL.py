@@ -16,7 +16,7 @@ class TLEL:
         for i in range(self.n_learner):
             dfs[i] = random_undersampling(dfs[i])
             X, y = dfs[i].iloc[:, :-1], dfs[i].iloc[:, -1]
-            learner = RandomForestClassifier(n_estimators=self.n_tree)
+            learner = RandomForestClassifier(n_estimators=self.n_tree, random_state=42)
             learner.fit(X, y)
             self.learners.append(learner)
 
