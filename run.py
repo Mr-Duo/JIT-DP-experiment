@@ -9,6 +9,7 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import roc_auc_score
 from imblearn.under_sampling import RandomUnderSampler
 from model.TLEL import TLEL
+import random
 
 
 def load_csv(path, file_name):
@@ -44,7 +45,7 @@ def get_params():
 
     return parser.parse_args()
 
-
+random.seed(42)
 params = get_params()
 
 # load data
