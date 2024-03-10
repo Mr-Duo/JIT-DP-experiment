@@ -110,7 +110,7 @@ with open(os.path.join(path, save_file), "wb") as f:
 if not os.path.exists(os.path.join(path, "pred_score")):
     os.makedirs(os.path.join(path, "pred_score"))
 label_df.to_csv(
-    os.path.join(path, "pred_score", f"test_sim_{params.prj}_{params.train_part}.csv")
+    os.path.join(path, "pred_score", f"test_sim_{params.prj}.csv")
 )
 
 with open(os.path.join(path, f"auc.txt"), "a") as f:
