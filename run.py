@@ -114,5 +114,5 @@ label_df.to_csv(
 )
 
 with open(os.path.join(path, f"auc.txt"), "a") as f:
-    f.write(f"{params.prj} - {params.model} - {params.train_part}: {auc}\n")
+    f.write(f"{params.prj} - {params.model} - best - model: {auc}\n")
 print("Done!")
