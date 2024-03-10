@@ -103,7 +103,7 @@ print("\tSaving model... ", end="")
 path = os.path.join(params.save_path, params.prj, params.model)
 if not os.path.exists(path):
     os.makedirs(path)
-save_file = f"{params.prj}_{params.train_part}.pkl"
+save_file = f"{params.prj}.pkl"
 with open(os.path.join(path, save_file), "wb") as f:
     pickle.dump(model, f)
 
