@@ -12,23 +12,23 @@ from model.TLEL import TLEL
 import random
 
 
-def load_csv(path, file_name):
-    if not os.path.exists(os.path.join(path, file_name)):
-        assert f"File {file_name} not found: {path}"
-    df = pd.read_csv(os.path.join(path, file_name))
+def load_csv(file_name):
+    if not os.path.exists(file_name):
+        assert f"File {file_name} not found"
+    df = pd.read_csv(file_name)
     return df
 
 
-def load_data(path, prj, part):
-    if not os.path.exists(os.path.join(path, prj)):
-        assert f"Dataset {prj} not found in {path}!"
-    if not os.path.exists(os.path.join(path, prj, "features")):
-        assert f"Folder 'features' not found in {path}/{prj}!"
+def load_data(train, test):
+    if not os.path.exists(train):
+        assert f"Dataset not found!"
+    if not os.path.exists(test):
+        assert f"Folder 'features' not found!"
 
-    train_file = f"{prj}_{part}.csv"
-    train_df = load_csv(os.path.join(path, prj, "features"), train_file)
-    test_file = f"{prj}_part_5.csv"
-    test_df = load_csv(os.path.join(path, prj, "features"), test_file)
+    train_file = train
+    train_df = load_csv(train_file)
+    test_file = test
+    test_df = load_csv(test_file)
 
     return train_df, test_df
 
@@ -37,12 +37,11 @@ def get_params():
     parser = argparse.ArgumentParser()
     model_names = ["la", "lr", "tlel", "sim"]
     parser.add_argument("--model", type=str, required=True, choices=model_names)
-    parser.add_argument("--data_path", type=str, required=True)
+    parser.add_argument("--train_data", type=str, required=True)
+    parser.add_argument("--test_data", type=str, required=True)
     parser.add_argument("--save_path", type=str, required=True)
-    train_parts = ["part_1_part_4", "part_3_part_4", "part_4"]
-    parser.add_argument("--train_part", type=str, required=True, choices=train_parts)
     parser.add_argument("--prj", type=str, required=True)
-
+    
     return parser.parse_args()
 
 random.seed(42)
@@ -69,7 +68,7 @@ cols = (
         "sexp",
     ]
 )
-train_df, test_df = load_data(params.data_path, params.prj, params.train_part)
+train_df, test_df = load_data(params.train_data, params.test_data)
 X_train = train_df.loc[:, cols]
 y_train = train_df.loc[:, "bug"]
 X_test = test_df.loc[:, cols]
