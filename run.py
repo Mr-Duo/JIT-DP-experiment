@@ -80,9 +80,7 @@ if params.model == "sim":
     )
 
 # train and evaluate model
-print(
-    f"{params.prj}\n\tStart trainning {params.model}\n\tTrain: {params.train_part} - Test: part_5"
-)
+print("Start training")
 start = time.time()
 if params.model == "la" or params.model == "lr":
     model = LogisticRegression(class_weight="balanced", max_iter=1000)
