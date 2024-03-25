@@ -73,7 +73,7 @@ X_train = train_df.loc[:, cols]
 y_train = train_df.loc[:, "bug"]
 X_test = test_df.loc[:, cols]
 y_test = test_df.loc[:, "bug"]
-
+id = train_df.loc[:, '_id']
 if params.model == "sim":
     X_train, y_train = RandomUnderSampler(random_state=42).fit_resample(
         X_train, y_train
@@ -92,7 +92,7 @@ elif params.model == "tlel":
 model.fit(X_train, y_train)
 y_proba = model.predict_proba(X_test)[:, 1]
 auc = roc_auc_score(y_test, y_proba)
-label_df = pd.DataFrame({"bug": y_test, "pred": y_proba})
+label_df = pd.DataFrame({"commit_hash": id,"label": y_test, "pred": y_proba})
 
 print(
     f"\tFinish training: {round(time.time() - start, 4)} seconds\n\tAUC: {round(auc, 4)}"
@@ -110,7 +110,7 @@ with open(os.path.join(path, save_file), "wb") as f:
 if not os.path.exists(os.path.join(path, "pred_score")):
     os.makedirs(os.path.join(path, "pred_score"))
 label_df.to_csv(
-    os.path.join(path, "pred_score", f"test_sim_{params.prj}.csv")
+    os.path.join(path, "pred_score", f"test_sim_{params.prj}.csv"), index=False, sep=','
 )
 
 with open(os.path.join(path, f"auc.txt"), "a") as f:
