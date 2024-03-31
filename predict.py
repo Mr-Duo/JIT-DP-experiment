@@ -38,7 +38,7 @@ def load_data(test):
     test_file = test
     test_df = load_csv(test_file)
 
-    return train_df, test_df
+    return test_df
 
 def get_model(params):
     path = os.path.join(params.save_path, params.prj, params.model, f"{params.prj}.pkl")
