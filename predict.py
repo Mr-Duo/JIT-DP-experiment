@@ -46,7 +46,7 @@ def get_model(params):
         print('Model not found')
         exit(1)
     
-    model = pickle.load(path)
+    model = pickle.load(open(path, 'rb'))
     return model
 
 def predict(model, X_test, y_test):
