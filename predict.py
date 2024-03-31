@@ -50,6 +50,7 @@ def get_model(params):
     return model
 
 def predict(model, X_test, y_test):
+    path = os.path.join(params.save_path, params.prj, params.model)
     y_proba = model.predict_proba(X_test)[:, 1]
     auc = roc_auc_score(y_test, y_proba)
     label_df = pd.DataFrame({"commit_hash": id,"label": y_test, "pred": y_proba})
