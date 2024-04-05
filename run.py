@@ -41,11 +41,12 @@ def get_params():
     parser.add_argument("--test_data", type=str, required=True)
     parser.add_argument("--save_path", type=str, required=True)
     parser.add_argument("--prj", type=str, required=True)
+    parser.add_argument("--seed", type=int, default=42)
     
     return parser.parse_args()
 
-random.seed(42)
 params = get_params()
+random.seed(params.seed)
 
 # load data
 cols = (
