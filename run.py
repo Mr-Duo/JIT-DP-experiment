@@ -76,7 +76,7 @@ X_test = test_df.loc[:, cols]
 y_test = test_df.loc[:, "bug"]
 id = test_df.loc[:, '_id']
 if params.model == "sim":
-    X_train, y_train = RandomUnderSampler(random_state=42).fit_resample(
+    X_train, y_train = RandomUnderSampler(random_state=params.seed).fit_resample(
         X_train, y_train
     )
 
