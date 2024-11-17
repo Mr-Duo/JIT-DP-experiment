@@ -73,7 +73,7 @@ cols = (
 )
 train_df, test_df= load_data(params.train_data, params.test_data)
 COLS = cols
-COLS.append["all"]
+COLS.append("all")
 # train and evaluate model
 print("Start training")
 for col in COLS:
