@@ -73,11 +73,15 @@ cols = (
 )
 train_df, test_df= load_data(params.train_data, params.test_data)
 COLS = cols
+COLS.append["all"]
 # train and evaluate model
 print("Start training")
 for col in COLS:
     cols = [col]
     print(col)
+    if col == "all":
+        cols = COLS
+        cols.remove("all")
     
     X_train = train_df.loc[:, cols]
     y_train = train_df.loc[:, "label"]
