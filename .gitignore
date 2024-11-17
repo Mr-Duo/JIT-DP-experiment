@@ -4,6 +4,7 @@ sim
 tlel
 jitline
 save
+out
 
 __pycache__
 .DS_Store

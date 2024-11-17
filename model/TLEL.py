@@ -1,6 +1,7 @@
 import pandas as pd
 import numpy as np
 from sklearn.ensemble import RandomForestClassifier
+from sklearn.metrics import accuracy_score
 from sklearn.utils import resample
 
 class TLEL:
@@ -25,6 +26,11 @@ class TLEL:
         for i in range(self.n_learner):
             y_pred.append(self.learners[i].predict_proba(X_test))
         return np.mean(y_pred, axis=0)
+    
+    def score(self, X, y, threshold=0.5):
+        predictions = self.predict_proba(X)[:, 1]
+        scores = [1 if pred >= threshold else 0 for pred in predictions]
+        return accuracy_score(y, scores)
 
 
 def split_df(df, num_subdf):
@@ -34,8 +40,8 @@ def split_df(df, num_subdf):
 
 
 def random_undersampling(df):
-    majority_class = df[df['bug'] == 0]
-    minority_class = df[df['bug'] == 1]
+    majority_class = df[df['label'] == 0]
+    minority_class = df[df['label'] == 1]
     if len(majority_class) < len(minority_class):
         majority_class, minority_class = minority_class, majority_class
 
